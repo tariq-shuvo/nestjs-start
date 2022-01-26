@@ -3,7 +3,7 @@ import { TaskStatus } from './../models/tasks.model';
 
 export class FilterTaskDto {
     @IsOptional()
-    @IsIn([TaskStatus.OPEN, TaskStatus.IN_PROGRESS, TaskStatus.DONE])
+    // @IsIn([TaskStatus.OPEN, TaskStatus.IN_PROGRESS, TaskStatus.DONE])
     status?: TaskStatus;
 
     @IsOptional()
