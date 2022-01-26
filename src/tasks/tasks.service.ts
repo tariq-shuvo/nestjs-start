@@ -1,3 +1,4 @@
+import { FilterTaskDto } from './dtos/filter-tasks.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { Task, TaskStatus } from './models/tasks.model';
 import { CreateTasksDto } from './dtos/create-tasks.dto';
@@ -9,6 +10,21 @@ export class TasksService {
 
     getAllTask(): Task[] {
         return this.tasks;
+    }
+
+    getFilteredTask(filterTaskDto: FilterTaskDto): Task[]{
+        const {status, search} = filterTaskDto;
+        let filteredTaskList = this.tasks;
+
+        if(status){
+            filteredTaskList = filteredTaskList.filter(task => task.status === status.toUpperCase());
+        }
+
+        if(search){
+            filteredTaskList = filteredTaskList.filter(task => task.title.includes(search) || task.description.includes(search));
+        }
+
+        return filteredTaskList;
     }
 
     getTaskByID(id: string): Task {
