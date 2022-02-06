@@ -8,8 +8,13 @@ export class AuthController {
         private authService:AuthService
     ){}
 
-    @Post()
+    @Post('/signup')
     async createUser(@Body(ValidationPipe) createUserDto:AuthCredentialDto){
         return this.authService.createUser(createUserDto);
+    }
+
+    @Post('/signin')
+    async loginUser(@Body(ValidationPipe) authCredentialDto:AuthCredentialDto){
+        return this.authService.loginUser(authCredentialDto);
     }
 }
